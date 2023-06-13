@@ -19,6 +19,7 @@ public class UIScript : MonoBehaviour
    public Text BestLapTimeSecondsText;
    public Text CheckPointTime;
    public GameObject CheckPointDisplay;
+   public GameObject NewLaprecord;
    private float DisplaySpeed;
    public int TotalLaps = 3;
 
@@ -30,6 +31,7 @@ public class UIScript : MonoBehaviour
       LapNumberText.text = "0";
       TotalLapsText.text = "/" + TotalLaps.ToString();
       CheckPointDisplay.SetActive(false);
+      NewLaprecord.SetActive(false);
    }
 
    private void Update()
@@ -89,21 +91,24 @@ public class UIScript : MonoBehaviour
       #endregion
 
       #region Working out best Lap Time
-
-      if (SaveScript.LastLapMinutes == SaveScript.BestLapTimeMinutes)
+      if (SaveScript.LapChange == true)
       {
-         if (SaveScript.LastLapSeconds < SaveScript.BestLapTimeSeconds)
+         if (SaveScript.LastLapMinutes == SaveScript.BestLapTimeMinutes)
          {
+            if (SaveScript.LastLapSeconds < SaveScript.BestLapTimeSeconds)
+            {
+               SaveScript.BestLapTimeSeconds = SaveScript.LastLapSeconds;
+               SaveScript.NewRecord = true;
+            }
+         }
+
+         if (SaveScript.LastLapMinutes < SaveScript.BestLapTimeMinutes)
+         {
+            SaveScript.BestLapTimeMinutes = SaveScript.LastLapMinutes;
             SaveScript.BestLapTimeSeconds = SaveScript.LastLapSeconds;
+            SaveScript.NewRecord = false;
          }
       }
-      
-      if (SaveScript.LastLapMinutes < SaveScript.BestLapTimeMinutes)
-      {
-         SaveScript.BestLapTimeMinutes = SaveScript.LastLapMinutes;
-         SaveScript.BestLapTimeSeconds = SaveScript.LastLapSeconds;
-      }
-
       #endregion
 
       #region Display Best Lap Time
@@ -126,6 +131,12 @@ public class UIScript : MonoBehaviour
          BestLapTimeSecondsText.text = (Mathf.Round(SaveScript.BestLapTimeSeconds).ToString());
       }
 
+      if (SaveScript.NewRecord)
+      {
+         NewLaprecord.SetActive(true);
+         StartCoroutine(LapRecordOff());
+      }
+      
       #endregion
 
       #region CheckPoint working out for CheckPoint 1
@@ -133,21 +144,25 @@ public class UIScript : MonoBehaviour
       if (SaveScript.CheckPointPass1 == true)
       {
          SaveScript.CheckPointPass1 = false;
-         CheckPointDisplay.SetActive(true);
+         if (SaveScript.LapNumber > 1)
+         {
+            CheckPointDisplay.SetActive(true);
 
-         if (SaveScript.ThisCheckPoint1 > SaveScript.LastCheckPoint1)
-         {
-            CheckPointTime.color = Color.red;
-            CheckPointTime.text = "-" + (SaveScript.ThisCheckPoint1 - SaveScript.LastCheckPoint1).ToString();
-            StartCoroutine(CheckPointOff());
+            if (SaveScript.ThisCheckPoint1 > SaveScript.LastCheckPoint1)
+            {
+               CheckPointTime.color = Color.red;
+               CheckPointTime.text = "-" + (SaveScript.ThisCheckPoint1 - SaveScript.LastCheckPoint1).ToString();
+               StartCoroutine(CheckPointOff());
+            }
+
+            if (SaveScript.ThisCheckPoint1 < SaveScript.LastCheckPoint1)
+            {
+               CheckPointTime.color = Color.green;
+               CheckPointTime.text = "+" + (SaveScript.LastCheckPoint1 - SaveScript.ThisCheckPoint1).ToString();
+               StartCoroutine(CheckPointOff());
+            }
          }
-         
-         if (SaveScript.ThisCheckPoint1 < SaveScript.LastCheckPoint1)
-         {
-            CheckPointTime.color = Color.green;
-            CheckPointTime.text = "+" + (SaveScript.LastCheckPoint1 - SaveScript.ThisCheckPoint1).ToString();
-            StartCoroutine(CheckPointOff());
-         }
+
       }
 
       #endregion
@@ -157,20 +172,23 @@ public class UIScript : MonoBehaviour
       if (SaveScript.CheckPointPass2 == true)
       {
          SaveScript.CheckPointPass2 = false;
-         CheckPointDisplay.SetActive(true);
+         if (SaveScript.LapNumber > 1)
+         {
+            CheckPointDisplay.SetActive(true);
 
-         if (SaveScript.ThisCheckPoint2 > SaveScript.LastCheckPoint2)
-         {
-            CheckPointTime.color = Color.red;
-            CheckPointTime.text = "-" + (SaveScript.ThisCheckPoint2 - SaveScript.LastCheckPoint2).ToString();
-            StartCoroutine(CheckPointOff());
-         }
-         
-         if (SaveScript.ThisCheckPoint2 < SaveScript.LastCheckPoint2)
-         {
-            CheckPointTime.color = Color.green;
-            CheckPointTime.text = "+" + (SaveScript.LastCheckPoint2 - SaveScript.ThisCheckPoint2).ToString();
-            StartCoroutine(CheckPointOff());
+            if (SaveScript.ThisCheckPoint2 > SaveScript.LastCheckPoint2)
+            {
+               CheckPointTime.color = Color.red;
+               CheckPointTime.text = "-" + (SaveScript.ThisCheckPoint2 - SaveScript.LastCheckPoint2).ToString();
+               StartCoroutine(CheckPointOff());
+            }
+
+            if (SaveScript.ThisCheckPoint2 < SaveScript.LastCheckPoint2)
+            {
+               CheckPointTime.color = Color.green;
+               CheckPointTime.text = "+" + (SaveScript.LastCheckPoint2 - SaveScript.ThisCheckPoint2).ToString();
+               StartCoroutine(CheckPointOff());
+            }
          }
       }
 
@@ -181,5 +199,12 @@ public class UIScript : MonoBehaviour
    {
       yield return new WaitForSeconds(2);
       CheckPointDisplay.SetActive(false);
+   }
+
+   IEnumerator LapRecordOff()
+   {
+      yield return new WaitForSeconds(2);
+      SaveScript.NewRecord = false;
+      NewLaprecord.SetActive(false);
    }
 }
