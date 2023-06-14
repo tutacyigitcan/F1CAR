@@ -6991,7 +6991,6 @@ Transform:
   - {fileID: 827013755}
   - {fileID: 375069523}
   - {fileID: 279762707}
-  - {fileID: 2139118808}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 82.904, z: 0}
@@ -11203,7 +11202,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2139118808}
   - component: {fileID: 2139118807}
-  - component: {fileID: 2139118806}
   - component: {fileID: 2139118805}
   m_Layer: 0
   m_Name: MiniMap Camera
@@ -11326,14 +11324,6 @@ MonoBehaviour:
       data1: 0
       data2: 0
   defaultFrameSettings: 0
---- !u!81 &2139118806
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2139118804}
-  m_Enabled: 1
 --- !u!20 &2139118807
 Camera:
   m_ObjectHideFlags: 0
@@ -11384,12 +11374,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2139118804}
-  m_LocalRotation: {x: 0.52998215, y: -0.46810147, z: 0.46810147, w: 0.52998215}
-  m_LocalPosition: {x: -146.98349, y: 466.38998, z: -94.37678}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 53.4, y: 466.4, z: -4.8999786}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 827013705}
-  m_RootOrder: 7
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &2144666360
 GameObject:
