@@ -284,6 +284,26 @@ namespace UnityStandardAssets.Vehicles.Car
                 WheelHit wheelHit;
                 m_WheelColliders[i].GetGroundHit(out wheelHit);
 
+                if (SaveScript.OnTheTerrain == true)
+                {
+                    if (wheelHit.collider.CompareTag("Road"))
+                    {
+                        Debug.Log(("On the road"));
+                        SaveScript.OnTheRoad = true;
+                        SaveScript.OnTheTerrain = false;
+                    }
+                }
+
+                if (SaveScript.OnTheRoad == true)
+                {
+                    if (wheelHit.collider.CompareTag("Terrain"))
+                    {
+                        Debug.Log("On the terrain");
+                        SaveScript.OnTheTerrain = true;
+                        SaveScript.OnTheRoad = false;
+                    }
+                }
+                
                 // is the tire slipping above the given threshhold
                 if (Mathf.Abs(wheelHit.forwardSlip) >= m_SlipLimit || Mathf.Abs(wheelHit.sidewaysSlip) >= m_SlipLimit)
                 {
@@ -328,10 +348,28 @@ namespace UnityStandardAssets.Vehicles.Car
                     m_WheelColliders[2].GetGroundHit(out wheelHit);
                     AdjustTorque(wheelHit.forwardSlip);
 
+                    if (wheelHit.collider.CompareTag("RumbleStrip") && CurrentSpeed > 10)
+                    {
+                        SaveScript.Rumble1 = true;
+                    }
+                    else
+                    {
+                        SaveScript.Rumble2 = false; 
+                    }
+
                     m_WheelColliders[3].GetGroundHit(out wheelHit);
                     AdjustTorque(wheelHit.forwardSlip);
+                    
+                    if (wheelHit.collider.CompareTag("RumbleStrip") && CurrentSpeed > 10)
+                    {
+                        SaveScript.Rumble2 = true;
+                    }
+                    else
+                    {
+                        SaveScript.Rumble1 = false;
+                    }
+                    
                     break;
-
                 case CarDriveType.FrontWheelDrive:
                     m_WheelColliders[0].GetGroundHit(out wheelHit);
                     AdjustTorque(wheelHit.forwardSlip);

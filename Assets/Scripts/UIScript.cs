@@ -20,6 +20,7 @@ public class UIScript : MonoBehaviour
    public Text CheckPointTime;
    public GameObject CheckPointDisplay;
    public GameObject NewLaprecord;
+   public GameObject WrongWayText;
    private float DisplaySpeed;
    public int TotalLaps = 3;
 
@@ -32,6 +33,7 @@ public class UIScript : MonoBehaviour
       TotalLapsText.text = "/" + TotalLaps.ToString();
       CheckPointDisplay.SetActive(false);
       NewLaprecord.SetActive(false);
+      WrongWayText.SetActive(false);
    }
 
    private void Update()
@@ -190,6 +192,20 @@ public class UIScript : MonoBehaviour
                StartCoroutine(CheckPointOff());
             }
          }
+      }
+
+      #endregion
+
+      #region Wrong way message
+
+      if (SaveScript.WrongWay == true)
+      {
+         WrongWayText.SetActive(true);
+      }
+      
+      if (SaveScript.WrongWay == false)
+      {
+         WrongWayText.SetActive(false);
       }
 
       #endregion
