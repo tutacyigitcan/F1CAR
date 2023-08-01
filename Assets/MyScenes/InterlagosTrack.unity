@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 5386.8984, g: 5984.1357, b: 7298.47, a: 1}
+  m_IndirectSpecularColor: {r: 5387.7373, g: 5985.1797, b: 7299.9795, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2535,6 +2535,85 @@ Transform:
   m_Father: {fileID: 7929665}
   m_RootOrder: 185
   m_LocalEulerAnglesHint: {x: 0, y: 71.343, z: 0}
+--- !u!1 &243161945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 243161948}
+  - component: {fileID: 243161947}
+  - component: {fileID: 243161946}
+  m_Layer: 5
+  m_Name: Wrong Way
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &243161946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243161945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: be2407ea778c0444695ea40da37d3faf, type: 3}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: WRONG WAY !
+--- !u!222 &243161947
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243161945}
+  m_CullTransparentMesh: 1
+--- !u!224 &243161948
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243161945}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1429104285}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 264.6, y: 351.82}
+  m_SizeDelta: {x: 879, y: 40}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &249591687 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7207653703646435068, guid: 431b81ba793116d4a81c93f82d46b6ec, type: 3}
@@ -20185,6 +20264,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentWP: 0
+  ThisWPNumber: 0
+  LastWPNumber: 0
 --- !u!82 &1152278938
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20443,6 +20524,7 @@ MonoBehaviour:
   CheckPointTime: {fileID: 1849256461}
   CheckPointDisplay: {fileID: 1849256459}
   NewLaprecord: {fileID: 1076669151}
+  WrongWayText: {fileID: 243161945}
   TotalLaps: 3
 --- !u!114 &1154299803
 MonoBehaviour:
@@ -23558,6 +23640,7 @@ GameObject:
   - component: {fileID: 1423053344}
   - component: {fileID: 1423053341}
   - component: {fileID: 1423053342}
+  - component: {fileID: 1423053343}
   m_Layer: 0
   m_Name: ProgressWaypoint (50)
   m_TagString: Untagged
@@ -23594,6 +23677,18 @@ MonoBehaviour:
   CarTracking: 0
   PenaltyOpiton: 0
   PenaltyWayPoint: 0
+--- !u!114 &1423053343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423053340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe2b11ffd7aa784409ef332e80b4cbb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1423053344
 Transform:
   m_ObjectHideFlags: 0
@@ -23641,6 +23736,7 @@ RectTransform:
   - {fileID: 1512549720}
   - {fileID: 815125997}
   - {fileID: 1076669152}
+  - {fileID: 243161948}
   m_Father: {fileID: 1154299801}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

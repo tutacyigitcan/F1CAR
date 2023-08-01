@@ -9,20 +9,25 @@ public class Lap : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            SaveScript.LastLapMinutes = SaveScript.LastLapMinutes;
-            SaveScript.LastLapSeconds = SaveScript.LastLapSeconds;
-            SaveScript.LapNumber++;
-            SaveScript.LapChange = true;
-            if (SaveScript.LapNumber == 2)
+            if (SaveScript.HalfWayActivated == true)
             {
-                SaveScript.BestLapTimeMinutes = SaveScript.LastLapMinutes;
-                SaveScript.BestLapTimeSeconds = SaveScript.LastLapSeconds;
-                SaveScript.NewRecord = true;
+                SaveScript.HalfWayActivated = false;
+                SaveScript.LastLapMinutes = SaveScript.LastLapMinutes;
+                SaveScript.LastLapSeconds = SaveScript.LastLapSeconds;
+                SaveScript.LapNumber++;
+                SaveScript.LapChange = true;
+                if (SaveScript.LapNumber == 2)
+                {
+                    SaveScript.BestLapTimeMinutes = SaveScript.LastLapMinutes;
+                    SaveScript.BestLapTimeSeconds = SaveScript.LastLapSeconds;
+                    SaveScript.NewRecord = true;
+                }
+
+                SaveScript.CheckPointPass1 = false;
+                SaveScript.CheckPointPass2 = false;
+                SaveScript.LastCheckPoint1 = SaveScript.ThisCheckPoint1;
+                SaveScript.LastCheckPoint2 = SaveScript.ThisCheckPoint2;
             }
-            SaveScript.CheckPointPass1 = false;
-            SaveScript.CheckPointPass2 = false;
-            SaveScript.LastCheckPoint1 = SaveScript.ThisCheckPoint1;
-            SaveScript.LastCheckPoint2 = SaveScript.ThisCheckPoint2;
         }
     }
 }
